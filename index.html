@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adeduro Akintade - Dreamscape Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #e0c3fc 25%, #c5daf7 50%, #d4f1f4 75%, #ffeef8 100%);
+            background-size: 400% 400%;
+            animation: gradient-drift 20s ease infinite;
+            color: #4a5568;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradient-drift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Comfortaa', cursive;
+        }
+
+        /* Floating Particles */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Content Layer */
+        .content-layer {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Floating Islands */
+        .floating-island {
+            position: relative;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
+            box-shadow: 
+                0 20px 60px rgba(149, 157, 165, 0.2),
+                0 0 40px rgba(255, 255, 255, 0.5),
+                inset 0 0 30px rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating-island:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 30px 80px rgba(149, 157, 165, 0.3),
+                0 0 60px rgba(255, 255, 255, 0.6),
+                inset 0 0 40px rgba(255, 255, 255, 0.4);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Soft Glow */
+        .soft-glow {
+            text-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.8),
+                0 0 40px rgba(197, 218, 247, 0.6);
+        }
+
+        .glow-pink {
+            text-shadow: 
+                0 0 20px rgba(255, 182, 193, 0.8),
+                0 0 40px rgba(255, 182, 193, 0.4);
+        }
+
+        .glow-purple {
+            text-shadow: 
+                0 0 20px rgba(224, 195, 252, 0.8),
+                0 0 40px rgba(224, 195, 252, 0.4);
+        }
+
+        /* Sway Animation */
+        @keyframes sway {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        .sway {
+            animation: sway 4s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        /* Underwater Float */
+        @keyframes underwater-float {
+            0%, 100% { 
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% { 
+                transform: translate(10px, -15px) rotate(1deg);
+            }
+            50% { 
+                transform: translate(-5px, -25px) rotate(-1deg);
+            }
+            75% { 
+                transform: translate(-15px, -15px) rotate(0.5deg);
+            }
+        }
+
+        .underwater-float {
+            animation: underwater-float 8s ease-in-out infinite;
+        }
+
+        /* Skill Cards */
+        .skill-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 
+                0 10px 30px rgba(149, 157, 165, 0.15),
+                inset 0 0 20px rgba(255, 255, 255, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.5s ease;
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .skill-card:nth-child(even) {
+            animation-delay: -2.5s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 
+                0 20px 50px rgba(149, 157, 165, 0.25),
+                inset 0 0 30px rgba(255, 255, 255, 0.6);
+        }
+
+        /* Timeline */
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, 
+                rgba(255, 182, 193, 0.5), 
+                rgba(197, 218, 247, 0.5),
+                rgba(224, 195, 252, 0.5));
+            box-shadow: 0 0 20px rgba(197, 218, 247, 0.5);
+            transform: translateX(-50%);
+        }
+
+        .timeline-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffb6c1, #c5daf7, #e0c3fc);
+            box-shadow: 
+                0 0 20px rgba(197, 218, 247, 0.6),
+                inset 0 0 10px rgba(255, 255, 255, 0.5);
+            animation: pulse-soft 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-soft {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(197, 218, 247, 0.6);
+            }
+            50% { 
+                transform: scale(1.2);
+                box-shadow: 0 0 30px rgba(197, 218, 247, 0.8);
+            }
+        }
+
+        .timeline-card {
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+
+        .timeline-card:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        /* Buttons */
+        .dream-btn {
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.6), rgba(197, 218, 247, 0.6));
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 25px;
+            padding: 12px 28px;
+            font-weight: 600;
+            color: #4a5568;
+            box-shadow: 
+                0 8px 20px rgba(149, 157, 165, 0.15),
+                inset 0 0 20px rgba(255, 255, 255, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dream-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .dream-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .dream-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 15px 35px rgba(149, 157, 165, 0.25),
+                inset 0 0 30px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Header */
+        .dream-header {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 30px rgba(149, 157, 165, 0.15);
+        }
+
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            height: 300px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* Parallax Layers */
+        .parallax-slow {
+            transform: translateZ(-1px) scale(2);
+        }
+
+        .parallax-medium {
+            transform: translateZ(-0.5px) scale(1.5);
+        }
+
+        /* Counter Glow */
+        .counter-glow {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffb6c1, #c5daf7, #e0c3fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(197, 218, 247, 0.6);
+            animation: pulse-soft 3s ease-in-out infinite;
+        }
+
+        /* Ethereal Particles */
+        .ethereal-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 20px rgba(197, 218, 247, 0.8);
+            animation: drift 15s ease-in-out infinite;
+        }
+
+        @keyframes drift {
+            0%, 100% { 
+                transform: translate(0, 0);
+                opacity: 0.3;
+            }
+            25% { 
+                transform: translate(100px, -100px);
+                opacity: 0.8;
+            }
+            50% { 
+                transform: translate(-50px, -200px);
+                opacity: 0.5;
+            }
+            75% { 
+                transform: translate(-100px, -100px);
+                opacity: 0.8;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #ffb6c1, #c5daf7, #e0c3fc);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(197, 218, 247, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #e0c3fc, #c5daf7, #ffb6c1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 30px;
+            }
+            .counter-glow {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles-canvas"></canvas>
+
+    <div class="content-layer">
+        <!-- Header -->
+        <header class="dream-header sticky top-0 z-50">
+            <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <div class="text-3xl font-bold soft-glow" style="color: #9b87b8;">
+                    ☁️ AA
+                </div>
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="#profile" class="text-gray-700 hover:text-purple-400 transition duration-300 font-semibold">Profile</a>
+                    <a href="#skills" class="text-gray-700 hover:text-purple-400 transition duration-300 font-semibold">Skills</a>
+                    <a href="#experience" class="text-gray-700 hover:text-purple-400 transition duration-300 font-semibold">Experience</a>
+                    <a href="#contact" class="dream-btn">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+            <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2">
+                <a href="#profile" class="block py-2 text-gray-700 hover:text-purple-400 font-semibold">Profile</a>
+                <a href="#skills" class="block py-2 text-gray-700 hover:text-purple-400 font-semibold">Skills</a>
+                <a href="#experience" class="block py-2 text-gray-700 hover:text-purple-400 font-semibold">Experience</a>
+                <a href="#contact" class="block py-2 text-gray-700 hover:text-purple-400 font-semibold">Contact</a>
+            </div>
+        </header>
+
+        <main class="container mx-auto px-6 py-12">
+            <!-- Hero Section -->
+            <section id="hero" class="text-center py-20 sway">
+                <h1 class="text-5xl md:text-7xl font-bold soft-glow mb-4" style="color: #9b87b8;">
+                    Adeduro Akintade
+                </h1>
+                <p class="text-xl md:text-2xl mb-4" style="color: #7a6b9f;">Web3 Community Builder & Moderator</p>
+                <div class="flex justify-center gap-4 mt-6">
+                    <div class="h-1 w-24 rounded-full bg-gradient-to-r from-pink-200 via-blue-200 to-purple-200"></div>
+                    <div class="h-1 w-24 rounded-full bg-gradient-to-r from-purple-200 via-pink-200 to-blue-200"></div>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile" class="py-16">
+                <div class="max-w-4xl mx-auto floating-island p-10 underwater-float">
+                    <h2 class="text-3xl font-bold text-center mb-6 glow-purple" style="color: #9b87b8;">Professional Profile</h2>
+                    <p class="text-lg text-gray-700 leading-relaxed text-center">
+                        Dedicated Web3 builder with experience in WEB 3 Ecosystem and online community management. Skilled in fostering engaging environments, enhancing user experiences, and leveraging knowledge of DAO, DeFi, and blockchain systems. Strong communicator with a proven track record in moderating and growing communities.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Achievement & Chart -->
+            <section class="py-16 grid md:grid-cols-2 gap-12 items-center">
+                <div class="floating-island p-10 text-center" style="animation-delay: -1s;">
+                    <h3 class="text-2xl font-bold mb-4 glow-pink" style="color: #d97aa0;">Key Achievement</h3>
+                    <p class="text-gray-700 mb-6">Grew community engagement at Bolana from 37 members to over:</p>
+                    <div id="subscriber-count" class="counter-glow" data-target="2000">0</div>
+                    <p class="text-xl mt-4" style="color: #7a6b9f;">Members in One Month</p>
+                </div>
+                <div class="floating-island p-10" style="animation-delay: -2s;">
+                    <h3 class="text-2xl font-bold mb-6 text-center soft-glow" style="color: #9b87b8;">Experience Overview</h3>
+                    <p class="text-center text-gray-700 mb-4">Distribution across Web3 ecosystem</p>
+                    <div class="chart-container">
+                        <canvas id="experienceChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" class="py-16">
+                <h2 class="text-3xl font-bold text-center mb-12 soft-glow" style="color: #9b87b8;">Core Competencies</h2>
+                <p class="text-center max-w-3xl mx-auto text-gray-700 mb-12">Versatile skill set focused on community building and strategic planning</p>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <div class="skill-card text-center">
+                        <div class="text-4xl mb-3">📊</div>
+                        <h3 class="font-semibold text-gray-700">Project Management</h3>
+                    </div>
+                    <div class="skill-card text-center">
+                        <div class="text-4xl mb-3">💪</div>
+                        <h3 class="font-semibold text-gray-700">Confidence</h3>
+                    </div>
+                    <div class="skill-card text-center">
+                        <div class="text-4xl mb-3">🤝</div>
+                        <h3 class="font-semibold text-gray-700">Networking</h3>
+                    </div>
+                    <div class="skill-card text-center">
+                        <div class="text-4xl mb-3">🔄</div>
+                        <h3 class="font-semibold text-gray-700">Cooperation</h3>
+                    </div>
+                    <div class="skill-card text-center">
+                        <div class="text-4xl mb-3">🎯</div>
+                        <h3 class="font-semibold text-gray-700">Adaptability</h3>
+                    </div>
+                    <div class="skill-card text-center">
+                        <div class="text-4xl mb-3">📋</div>
+                        <h3 class="font-semibold text-gray-700">Organisation</h3>
+                    </div>
+                    <div class="skill-card text-center">
+                        <div class="text-4xl mb-3">🌍</div>
+                        <h3 class="font-semibold text-gray-700">Community Engagement</h3>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education Section -->
+            <section id="education" class="py-16">
+                <h2 class="text-3xl font-bold text-center mb-6 glow-purple" style="color: #9b87b8;">Education & Training</h2>
+                <div class="max-w-lg mx-auto floating-island p-8 text-center underwater-float" style="animation-delay: -3s;">
+                    <ul class="text-lg space-y-4 text-gray-700">
+                        <li class="flex items-center justify-center">
+                            <span class="text-2xl mr-3">🎓</span>
+                            <span>Ekiti State University</span>
+                        </li>
+                        <li class="flex items-center justify-center">
+                            <span class="text-2xl mr-3">📚</span>
+                            <span>Propel Learning</span>
+                        </li>
+                        <li class="flex items-center justify-center">
+                            <span class="text-2xl mr-3">💼</span>
+                            <span>Jobberman Softskills</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Experience Timeline -->
+            <section id="experience" class="py-16">
+                <h2 class="text-3xl font-bold text-center mb-4 soft-glow" style="color: #9b87b8;">Professional Experience</h2>
+                <p class="text-center max-w-3xl mx-auto text-gray-700 mb-12">Interactive timeline of Web3 community management roles</p>
+                <div class="flex justify-center space-x-4 mb-12 flex-wrap gap-2">
+                    <button class="filter-btn dream-btn" data-filter="all">All</button>
+                    <button class="filter-btn dream-btn" data-filter="moderator">Moderator</button>
+                    <button class="filter-btn dream-btn" data-filter="ambassador">Ambassador</button>
+                </div>
+                <div id="timeline-container" class="relative max-w-3xl mx-auto">
+                </div>
+            </section>
+
+            <!-- Accomplishments -->
+            <section id="accomplishments" class="py-16">
+                <h2 class="text-3xl font-bold text-center mb-6 glow-pink" style="color: #d97aa0;">Notable Achievements</h2>
+                <div class="max-w-3xl mx-auto floating-island p-8 underwater-float" style="animation-delay: -4s;">
+                    <ul class="space-y-6 text-lg">
+                        <li class="flex items-start">
+                            <span class="text-pink-400 mr-4 text-3xl">🚀</span>
+                            <span class="text-gray-700">Grew community engagement at Bolana from 37 members to 2000 within a month</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-pink-400 mr-4 text-3xl">🏆</span>
+                            <span class="text-gray-700">Recognized as "Top Moderator" for outstanding contribution in maintaining a safe environment</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="py-16 text-center floating-island p-10">
+                <h2 class="text-3xl font-bold mb-4 glow-purple" style="color: #9b87b8;">Get In Touch</h2>
+                <p class="text-gray-700 mb-8 max-w-xl mx-auto">Open to discussing new Web3 projects and community management opportunities</p>
+                <div class="flex flex-wrap justify-center items-center gap-6 mb-8">
+                    <a href="mailto:adeduroakintade@gmail.com" class="text-lg text-purple-600 hover:text-pink-500 transition">adeduroakintade@gmail.com</a>
+                    <span class="hidden md:block text-gray-400">☁️</span>
+                    <p class="text-lg text-gray-700">+2348036370047</p>
+                    <span class="hidden md:block text-gray-400">☁️</span>
+                    <p class="text-lg text-gray-700">Nigeria</p>
+                </div>
+                <div class="flex justify-center flex-wrap gap-6">
+                    <a href="https://t.me/adexboy0062" target="_blank" class="dream-btn">
+                        📱 Telegram
+                    </a>
+                    <a href="https://x.com/adexboy10" target="_blank" class="dream-btn">
+                        🐦 X Platform
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center py-6 text-gray-600 border-t border-purple-200/30">
+            <p>&copy; 2025 Adeduro Akintade. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Experience Data
+            const experienceData = [
+                { role: "Community Moderator", company: "FLUFFY MEMECOIN", type: "moderator", details: ["Moderated community discussions", "Enforced guidelines"] },
+                { role: "Community Moderator", company: "BETY IGAMING CASINO", type: "moderator", details: ["Managed gaming community", "Platform support"] },
+                { role: "Community Manager", company: "BOLANA MEMECOIN", type: "moderator", details: ["Grew community from 37 to 2000", "Growth strategies"] },
+                { role: "Community Moderator", company: "STREAMDATAX", type: "moderator", details: ["Data platform moderation", "Technical support"] },
+                { role: "Community Moderator", company: "FREELANCE DAO", type: "moderator", details: ["DAO governance", "Decentralized processes"] },
+                { role: "Community Manager", company: "TYPEDIGITALAI", type: "moderator", details: ["AI platform community", "Event coordination"] },
+                { role: "Community Manager", company: "SUILAUNCH", type: "moderator", details: ["Sui blockchain launch", "Marketing coordination"] },
+                { role: "Community Moderator", company: "ARVADEX", type: "moderator", details: ["DEX community support", "Troubleshooting"] },
+                { role: "Community Moderator", company: "GTM LABS", type: "moderator", details: ["Tech community", "Product launches"] },
+                { role: "Community Moderator", company: "RWAN", type: "moderator", details: ["Community interactions", "Engagement"] },
+                { role: "Community Moderator", company: "DECENTER AIDC", type: "moderator", details: ["AI community", "Knowledge sharing"] },
+                { role: "Ambassador", company: "ALPHA BRIDGE", type: "ambassador", details: ["Brand representation", "Cross-chain promotion"] },
+                { role: "Ambassador", company: "SOLIDO", type: "ambassador", details: ["Solana promotion", "Content creation"] },
+                { role: "Ambassador", company: "FLIP FLOP", type: "ambassador", details: ["Community representation", "User acquisition"] },
+                { role: "Ambassador", company: "CUBANE", type: "ambassador", details: ["Project promotion", "Partner relationships"] }
+            ];
+
+            const timelineContainer = document.getElementById('timeline-container');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+
+            const createTimelineItem = (item, index) => {
+                const detailsHtml = item.details.map(d => `<li class="text-gray-700">${d}</li>`).join('');
+                const itemEl = document.createElement('div');
+                itemEl.className = 'timeline-item mb-8 flex justify-between items-center w-full';
+                itemEl.innerHTML = `
+                    <div class="order-1 w-5/12"></div>
+                    <div class="z-20 flex items-center order-1 timeline-dot"></div>
+                    <div class="order-1 floating-island rounded-lg w-5/12 px-6 py-4 timeline-card">
+                        <h3 class="font-bold text-purple-600 text-base">${item.role}</h3>
+                        <p class="text-sm font-medium text-pink-500">${item.company}</p>
+                        <div class="timeline-details hidden mt-3">
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                ${detailsHtml}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+                return itemEl;
+            };
+
+            const renderTimeline = (filter) => {
+                timelineContainer.innerHTML = '<div class="timeline-line"></div>';
+                const filteredData = filter === 'all' ? experienceData : experienceData.filter(item => item.type === filter);
+
+                filteredData.forEach((item, index) => {
+                    const timelineItem = createTimelineItem(item, index);
+                    if (index % 2 !== 0) {
+                        timelineItem.classList.add('flex-row-reverse');
+                    }
+                    timelineContainer.appendChild(timelineItem);
+                });
+                
+                document.querySelectorAll('.timeline-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        card.querySelector('.timeline-details').classList.toggle('hidden');
+                    });
+                });
+            };
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    renderTimeline(btn.dataset.filter);
+                });
+            });
+
+            renderTimeline('all');
+
+            // Counter Animation
+            const countUp = (el) => {
+                const target = +el.dataset.target;
+                const duration = 2500;
+                const frameRate = 1000 / 60;
+                const totalFrames = Math.round(duration / frameRate);
+                let frame = 0;
+                
+                const counter = setInterval(() => {
+                    frame++;
+                    const progress = frame / totalFrames;
+                    const current = Math.round(target * progress);
+                    el.textContent = current.toLocaleString();
+
+                    if (frame === totalFrames) {
+                        clearInterval(counter);
+                        el.textContent = target.toLocaleString();
+                    }
+                }, frameRate);
+            };
+
+            const counterElement = document.getElementById('subscriber-count');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        countUp(counterElement);
+                        observer.unobserve(counterElement);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            observer.observe(counterElement);
+
+            // Chart
+            const ctx = document.getElementById('experienceChart').getContext('2d');
+            const moderatorCount = experienceData.filter(e => e.type === 'moderator').length;
+            const ambassadorCount = experienceData.filter(e => e.type === 'ambassador').length;
+            
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Moderator/Manager', 'Ambassador'],
+                    datasets: [{
+                        data: [moderatorCount, ambassadorCount],
+                        backgroundColor: [
+                            'rgba(197, 218, 247, 0.7)',
+                            'rgba(255, 182, 193, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(197, 218, 247, 1)',
+                            'rgba(255, 182, 193, 1)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            labels: {
+                                color: '#4a5568',
+                                padding: 15,
+                                font: { size: 12 }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            borderColor: '#c5daf7',
+                            borderWidth: 2,
+                            titleColor: '#4a5568',
+                            bodyColor: '#4a5568'
+                        }
+                    }
+                }
+            });
+
+            // Particle Animation
+            const canvas = document.getElementById('particles-canvas');
+            const ctxCanvas = canvas.getContext('2d');
+            let particles = [];
+            const particleCount = 60;
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.vx = (Math.random() - 0.5) * 0.3;
+                    this.vy = (Math.random() - 0.5) * 0.3;
+                    this.radius = Math.random() * 3 + 2;
+                    
+                    const colors = [
+                        'rgba(255, 182, 193, 0.6)',
+                        'rgba(197, 218, 247, 0.6)',
+                        'rgba(224, 195, 252, 0.6)',
+                        'rgba(255, 255, 255, 0.8)'
+                    ];
+                    this.color = colors[Math.floor(Math.random() * colors.length)];
+                }
+
+                draw() {
+                    ctxCanvas.beginPath();
+                    ctxCanvas.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    
+                    const gradient = ctxCanvas.createRadialGradient(
+                        this.x, this.y, 0,
+                        this.x, this.y, this.radius * 4
+                    );
+                    gradient.addColorStop(0, this.color);
+                    gradient.addColorStop(1, 'transparent');
+                    
+                    ctxCanvas.fillStyle = gradient;
+                    ctxCanvas.fill();
+                    
+                    ctxCanvas.fillStyle = this.color;
+                    ctxCanvas.fill();
+                }
+
+                update() {
+                    if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+                        this.vx = -this.vx;
+                    }
+                    if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+                        this.vy = -this.vy;
+                    }
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    this.draw();
+                }
+            }
+
+            function initParticles() {
+                particles = [];
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+            }
+
+            function animateParticles() {
+                ctxCanvas.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(particle => {
+                    particle.update();
+                });
+                
+                requestAnimationFrame(animateParticles);
+            }
+
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                initParticles();
+            });
+
+            resizeCanvas();
+            initParticles();
+            animateParticles();
+        });
+    </script>
+</body>
+</html>
