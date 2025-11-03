@@ -1,361 +1,660 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Happy Birthday Shraddha Suhani</title>
-<style>
-  body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    background: #fff0f6;
-    color: #3a3a3a;
-    overflow-x: hidden;
-  }
-  header {
-    text-align: center;
-    font-weight: 600;
-    font-size: 1.6rem;
-    padding: 1rem 0 0.5rem 0;
-    color: #d6336c;
-  }
-  #step1 video {
-    width: 100vw;
-    height: auto;
-    display: block;
-  }
-  .center-text {
-    text-align: center;
-    padding: 1rem;
-    font-size: 1.1rem;
-  }
-  .cta-btn {
-    display: block;
-    background: #ff4d6d;
-    width: 200px;
-    margin: 1rem auto 2rem auto;
-    padding: 1rem;
-    text-align: center;
-    font-size: 1.2rem;
-    color: white;
-    border-radius: 50px;
-    cursor: pointer;
-    animation: pulse 2s infinite;
-    user-select: none;
-  }
-  @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(255, 77, 109, 0.7); }
-    70% { box-shadow: 0 0 0 10px rgba(255, 77, 109, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(255, 77, 109, 0); }
-  }
-  .step {
-    display: none;
-    padding: 1rem 1rem 4rem 1rem;
-  }
-  .step.active {
-    display: block;
-  }
-  .lock-img {
-    display: block;
-    margin: 0.5rem auto 1rem auto;
-    width: 80px;
-  }
-  .challenge-text {
-    font-weight: 700;
-    font-size: 1.1rem;
-    text-align: center;
-    margin-bottom: 0.5rem;
-  }
-  input[type="text"] {
-    display: block;
-    margin: 0 auto;
-    padding: 0.8rem;
-    width: 80%;
-    font-size: 1rem;
-    border-radius: 10px;
-    border: 1.5px solid #d6336c;
-    outline: none;
-  }
-  button {
-    display: block;
-    margin: 1rem auto;
-    background-color: #d6336c;
-    color: white;
-    font-size: 1.1rem;
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-  }
-  #errorMsg {
-    text-align: center;
-    color: #d6336c;
-    font-weight: 600;
-    margin-top: 0.5rem;
-    display: none;
-  }
-  /* Gallery styles */
-  .gallery {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 1rem;
-    padding-bottom: 1rem;
-  }
-  .gallery::-webkit-scrollbar {
-    height: 5px;
-  }
-  .gallery::-webkit-scrollbar-thumb {
-    background: #ff4d6d;
-    border-radius: 10px;
-  }
-  .photo {
-    scroll-snap-align: start;
-    min-width: 80vw;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(214, 51, 108, 0.3);
-  }
-  .photo img {
-    width: 100%;
-    border-radius: 15px 15px 0 0;
-  }
-  .caption {
-    background: #fff0f6;
-    padding: 0.8rem 1rem;
-    border-radius: 0 0 15px 15px;
-    text-align: center;
-    font-weight: 600;
-    font-size: 1rem;
-    color: #b03a5b;
-  }
-  #hearHeartBtn {
-    margin-top: 1rem;
-  }
-  /* Dedication */
-  #step4 p {
-    font-size: 1.1rem;
-    font-style: italic;
-    text-align: center;
-    margin-bottom: 1rem;
-    color: #d6336c;
-  }
-  audio {
-    width: 95%;
-    display: block;
-    margin: 0 auto 1.5rem auto;
-  }
-  /* Promise cards */
-  .promises {
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .promise-card {
-    background: #ffcedd;
-    border-radius: 15px;
-    padding: 1rem;
-    box-shadow: 0 3px 6px rgba(214, 51, 108, 0.4);
-    cursor: pointer;
-    user-select: none;
-    transition: transform 0.3s ease;
-  }
-  .promise-card:hover {
-    transform: scale(1.05);
-  }
-  .promise-card h3 {
-    margin: 0 0 0.3rem 0;
-    color: #9b184f;
-  }
-  .promise-card p {
-    margin: 0;
-    font-weight: 600;
-    color: #7a1658;
-  }
-  .flip-content {
-    margin-top: 0.5rem;
-    font-weight: normal;
-    color: #b33a48;
-  }
-  .hidden {
-    display: none;
-  }
-  #finalMessage {
-    font-family: 'Brush Script MT', cursive;
-    font-size: 1.6rem;
-    text-align: center;
-    margin-top: 2rem;
-    color: #d6336c;
-  }
-  #finalInstruction {
-    text-align: center;
-    font-weight: 700;
-    font-size: 1.2rem;
-    margin-top: 1rem;
-    color: #9b184f;
-  }
-  #signOff {
-    text-align: right;
-    margin-top: 2rem;
-    font-style: italic;
-    font-size: 0.9rem;
-    color: #6b1947;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Love!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            /* A soft, cute background */
+            background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+            overflow: hidden; /* To control overflow from animations */
+        }
+
+        .cute-font {
+            font-family: 'Caveat', cursive;
+        }
+
+        /* --- Animation Classes --- */
+        
+        /* Pop-in animation for sections */
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.8) translateY(20px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .animate-pop-in {
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Heartbeat animation for the main heart icon */
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .animate-heartbeat {
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        /* Shake animation for wrong answer */
+        @keyframes shake {
+            10%, 90% { transform: translateX(-1px); }
+            20%, 80% { transform: translateX(2px); }
+            30%, 50%, 70% { transform: translateX(-4px); }
+            40%, 60% { transform: translateX(4px); }
+        }
+
+        .animate-shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        /* Fade-in for gallery images */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .gallery-item {
+            animation: fadeIn 0.5s ease-out forwards;
+            opacity: 0; /* Start hidden */
+        }
+
+        /* Animation for flying hearts on the last screen */
+        @keyframes fly {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -20px;
+            font-size: 2rem;
+            opacity: 0;
+            animation: fly 10s linear infinite;
+        }
+
+        /* Staggered delays for hearts */
+        .heart:nth-child(1) { left: 10%; animation-delay: 0s; color: #f472b6; }
+        .heart:nth-child(2) { left: 20%; animation-delay: 2s; color: #ec4899; }
+        .heart:nth-child(3) { left: 30%; animation-delay: 4s; color: #a21caf; }
+        .heart:nth-child(4) { left: 40%; animation-delay: 1s; color: #f472b6; }
+        .heart:nth-child(5) { left: 50%; animation-delay: 3s; color: #ec4899; }
+        .heart:nth-child(6) { left: 60%; animation-delay: 5s; color: #a21caf; }
+        .heart:nth-child(7) { left: 70%; animation-delay: 0.5s; color: #f472b6; }
+        .heart:nth-child(8) { left: 80%; animation-delay: 1.5s; color: #ec4899; }
+        .heart:nth-child(9) { left: 90%; animation-delay: 2.5s; color: #a21caf; }
+
+        /* Style for the pop-up emojis */
+        .popup-emoji {
+            position: absolute;
+            font-size: 2.5rem;
+            user-select: none;
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .popup-emoji.fade-out {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(1.5);
+        }
+
+        /* --- NEW: Infinity Animation --- */
+        .infinity-svg {
+            width: 150px;
+            height: 100px;
+            margin-top: 1rem; /* 16px */
+        }
+
+        .infinity-path {
+            fill: none;
+            stroke: #ec4899; /* Pink color */
+            stroke-width: 6;
+            stroke-linecap: round;
+            stroke-dasharray: 283; /* Estimated path length */
+            stroke-dashoffset: 283;
+            animation: draw-infinity 3s linear infinite;
+        }
+
+        @keyframes draw-infinity {
+            to {
+                stroke-dashoffset: 0; /* Animate to fully drawn */
+            }
+        }
+    </style>
 </head>
-<body>
+<body class="text-gray-800">
 
-<!-- Step 1: Invitation -->
-<div id="step1" class="step active">
-  <header>Happy Birthday, My Love</header>
-  <video autoplay muted playsinline loop>
-    <source src="waving-video.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-  <p class="center-text">Welcome to Shraddha-land, a place made just for you. This adventure is dedicated to The Story of Us.</p>
-  <div id="startBtn" class="cta-btn" tabindex="0">Start the Adventure</div>
-</div>
+    <!-- This main div holds all the steps -->
+    <div class="relative min-h-screen overflow-hidden">
 
-<!-- Step 2: The Lock -->
-<div id="step2" class="step">
-  <img src="lock.png" alt="Lock Image" class="lock-img" />
-  <p class="challenge-text">Only the one who knows our secrets can unlock this next surprise. What was the name you had given when we met first time before exam?</p>
-  <input type="text" id="secretInput" placeholder="Enter your answer" autocomplete="off" />
-  <button id="checkAnswerBtn">Unlock</button>
-  <p id="errorMsg">Hmm, try again, darling. Think back to that funny spill!</p>
-</div>
+        <!-- (Steps 1-5 remain exactly the same) -->
 
-<!-- Step 3: The Memory Vault -->
-<div id="step3" class="step">
-  <h2 class="center-text">Our Adventures: A Memory Scroll</h2>
-  <div class="gallery" id="gallery">
-    <div class="photo">
-      <img src="photo1.jpg" alt="Favorite Dish" />
-      <p class="caption">The day you taught me to love your favorite dish.</p>
+        <!-- STEP 1: Welcome -->
+        <section id="step-1" class="flex flex-col items-center justify-center min-h-screen p-6 text-center animate-pop-in">
+            <div class="bg-white p-8 md:p-12 rounded-3xl shadow-2xl max-w-lg w-full">
+                
+                <!-- Heart Icon -->
+                <svg class="w-20 h-20 text-pink-500 mx-auto animate-heartbeat" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path></svg>
+                
+                <h1 class="cute-font text-5xl md:text-7xl text-pink-600 mt-4">Happy Birthday...</h1>
+                <p class="text-2xl md:text-3xl text-gray-600 mt-2">To my one and only,</p>
+                <p class="cute-font text-6xl md:text-8xl text-purple-600 mt-2">Shraddha!</p>
+                <p class="text-lg text-gray-500 mt-6">I've made a little something just for you, my lovlely doll.</p>
+                
+                <button 
+                    onclick="showStep('step-2-lock')" 
+                    class="mt-8 py-3 px-8 bg-pink-600 text-white text-xl font-bold rounded-full shadow-lg transform transition-transform hover:scale-110 hover:bg-pink-700 focus:outline-none focus:ring-4 focus:ring-pink-300">
+                    Click for your first surprise! &rarr;
+                </button>
+            </div>
+        </section>
+
+        <!-- STEP 2: Lock Screen -->
+        <section id="step-2-lock" class="hidden min-h-screen p-6 flex items-center justify-center" onclick="event.stopPropagation()">
+            <div id="lock-box" class="bg-white p-8 md:p-12 rounded-3xl shadow-2xl max-w-lg w-full text-center animate-pop-in">
+                <div class="text-6xl mb-4">🔒</div>
+                <h2 class="cute-font text-4xl md:text-5xl text-purple-600">A Secret Question...</h2>
+                <p class="text-lg text-gray-600 mt-4 mb-6">Who is the very special and close person of Kulfi's life?</p>
+                
+                <input type="text" id="secret-answer" class="w-full px-4 py-3 text-center text-lg border-2 border-gray-300 rounded-full focus:border-pink-500 focus:ring-pink-500" placeholder="Type your answer here...">
+                
+                <p id="error-message" class="text-red-500 mt-2 h-6"></p>
+
+                <button 
+                    onclick="checkAnswer()" 
+                    class="mt-4 w-full py-3 px-8 bg-pink-600 text-white text-xl font-bold rounded-full shadow-lg transform transition-transform hover:scale-105 hover:bg-pink-700 focus:outline-none focus:ring-4 focus:ring-pink-300">
+                    Unlock Surprise!
+                </button>
+            </div>
+        </section>
+
+        <!-- STEP 3: Heartfelt Message -->
+        <section id="step-3" class="hidden min-h-screen p-6 flex items-center justify-center" onclick="event.stopPropagation()">
+            <div class="bg-white p-8 md:p-10 rounded-3xl shadow-2xl max-w-2xl w-full my-12 animate-pop-in overflow-y-auto" style="max-height: 90vh;">
+                <h2 class="cute-font text-5xl text-purple-600 text-center">From My Heart...</h2>
+                <div class="text-lg text-gray-700 mt-6 space-y-4 text-center">
+                    <p>I love you so much, you are my world and you mean everything to me.</p>
+                    <p class="text-pink-600 font-semibold">Jabse tum meri life me ayi ho, tabse meri life khushi se bhar gayi hai.</p>
+                    <p>Mujhe itna pyaar aaj tak kisi ne nahi diya tha jitna tumne diya.</p>
+                    <p class="text-pink-600 font-semibold">Merko itna close aajtak koi nahi laga tha jitna tum mere close thi.</p>
+                    <p>Tum mere liye sab kuch ho. You are my world. I love you so much.</p>
+                    <p>You’re not just my love, you're my best friend, my partner in crime, and the person who makes every single day better.</p>
+                    <p class="cute-font text-4xl text-pink-700 mt-4">Happy Birthday Wiffey!</p>
+                    <p>Always be happy and keep smiling, mere bache...</p>
+                    <p class="cute-font text-5xl text-purple-600">Muaaahhhh cutiee!!</p>
+                </div>
+
+                <button 
+                    onclick="showStep('step-4')" 
+                    class="mt-8 w-full py-3 px-8 bg-purple-600 text-white text-xl font-bold rounded-full shadow-lg transform transition-transform hover:scale-105 hover:bg-purple-700 focus:outline-none focus:ring-4 focus:ring-purple-300">
+                    Wait, there's more... &darr;
+                </button>
+            </div>
+        </section>
+
+        <!-- STEP 4: Gallery -->
+        <section id="step-4" class="hidden min-h-screen p-4 md:p-8" onclick="event.stopPropagation()">
+            <div class="bg-white p-6 md:p-8 rounded-3xl shadow-2xl w-full max-w-6xl mx-auto my-8 animate-pop-in" style="max-height: 95vh; overflow-y: auto;">
+                <h2 class="cute-font text-5xl md:text-6xl text-pink-600 text-center mb-6">Princess Album</h2>
+                
+                <!-- Image Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                    
+                    <!-- Image 1 -->
+                    <div class="space-y-2 gallery-item" style="animation-delay: 0.1s;">
+                        <img src="https://i.ibb.co/pvFCbzKK/IMG-20250617-115348.jpg" alt="Shraddha" class="w-full h-64 object-cover rounded-2xl shadow-lg" onerror="this.src='https://placehold.co/600x400/fecdd3/db2777?text=Error!'">
+                        <p class="text-center text-sm text-gray-600">That smile... it's my whole world.</p>
+                    </div>
+                    <!-- Image 2 -->
+                    <div class="space-y-2 gallery-item" style="animation-delay: 0.2s;">
+                        <img src="https://i.ibb.co/DHGvJwWf/IMG-20250113-WA0012.jpg" alt="Shraddha" class="w-full h-64 object-cover rounded-2xl shadow-lg" onerror="this.src='https://placehold.co/600x400/fecdd3/db2777?text=Error!'">
+                        <p class="text-center text-sm text-gray-600">Cuteness overload! My gorgeous wifey.</p>
+                    </div>
+                    <!-- Image 3 -->
+                    <div class="space-y-2 gallery-item" style="animation-delay: 0.3s;">
+                        <img src="https://i.ibb.co/wFyyrmHn/IMG-20241130-000415-340.jpg" alt="Shraddha" class="w-full h-64 object-cover rounded-2xl shadow-lg" onerror="this.src='https.://placehold.co/600x400/fecdd3/db2777?text=Error!'">
+                        <p class="text-center text-sm text-gray-600">This picture makes my heart skip a beat.</p>
+                    </div>
+                    <!-- Image 4 -->
+                    <div class="space-y-2 gallery-item" style="animation-delay: 0.4s;">
+                        <img src="https://i.ibb.co/5WGcyVrs/IMG-20240624-002713-278.jpg" alt="Shraddha" class="w-full h-64 object-cover rounded-2xl shadow-lg" onerror="this.src='https://placehold.co/600x400/fecdd3/db2777?text=Error!'">
+                        <p class="text-center text-sm text-gray-600">Lost in your thoughts? I'm right here.</p>
+                    </div>
+                    <!-- Image 5 -->
+                    <div class="space-y-2 gallery-item" style="animation-delay: 0.5s;">
+                        <img src="https://i.ibb.co/T32zdQ8/IMG-20240828-221201-171.jpg" alt="Shraddha" class="w-full h-64 object-cover rounded-2xl shadow-lg" onerror="this.src='https://placehold.co/600x400/fecdd3/db2777?text=Error!'">
+                        <p class="text-center text-sm text-gray-600">The queen of my heart. I love you!</p>
+                    </div>
+                    <!-- Image 6 -->
+                    <div class="space-y-2 gallery-item" style="animation-delay: 0.6s;">
+                        <img src="https://i.ibb.co/XrP0JKVg/IMG-20250119-WA0007-1751507469295.jpg" alt="Shraddha" class="w-full h-64 object-cover rounded-2xl shadow-lg" onerror="this.src='https://placehold.co/600x400/fecdd3/db2777?text=Error!'">
+                        <p class="text-center text-sm text-gray-600">My queen, radiant as ever.</p>
+                    </div>
+                    <!-- Image 7 -->
+                    <div class="space-y-2 gallery-item" style="animation-delay: 0.7s;">
+                        <img src="https://i.ibb.co/xqjkcRZR/IMG-20250617-WA0064.jpg" alt="Shraddha" class="w-full h-64 object-cover rounded-2xl shadow-lg" onerror="this.src='https://placehold.co/600x400/fecdd3/db2777?text=Error!'">
+                        <p class="text-center text-sm text-gray-600">My stunning queen. You look divine!</p>
+                    </div>
+                    <!-- Image 8 -->
+                    <div class="space-y-2 gallery-item" style="animation-delay: 0.8s;">
+                        <img src="https://i.ibb.co/yckZVnr3/IMG-20240624-003120-347.jpg" alt="Shraddha" class="w-full h-64 object-cover rounded-2xl shadow-lg" onerror="this.src='https://placehold.co/600x400/fecdd3/db2777?text=Error!'">
+                        <p class="text-center text-sm text-gray-600">My beautiful doll, from every angle.</p>
+                    </div>
+                    <!-- Image 9 -->
+                    <div class="space-y-2 gallery-item" style="animation-delay: 0.9s;">
+                        <img src="https://i.ibb.co/v6MXJvrs/IMG-20241207-000200-943.jpg" alt="Shraddha" class="w-full h-64 object-cover rounded-2xl shadow-lg" onerror="this.src='https://placehold.co/600x400/fecdd3/db2777?text=Error!'">
+                        <p class="text-center text-sm text-gray-600">My Desi girl... forever and always.</p>
+                    </div>
+                    <!-- Image 10 -->
+                    <div class="space-y-2 gallery-item" style="animation-delay: 1.0s;">
+                        <img src="https://i.ibb.co/rKnXyXQd/IMG-20241224-WA0009.jpg" alt="Shraddha" class="w-full h-64 object-cover rounded-2xl shadow-lg" onerror="this.src='https.://placehold.co/600x400/fecdd3/db2777?text=Error!'">
+                        <p class="text-center text-sm text-gray-600">Always shining, always my star.</p>
+                    </div>
+                </div>
+
+                <button 
+                    onclick="showStep('step-5')" 
+                    class="mt-8 w-full py-3 px-8 bg-pink-600 text-white text-xl font-bold rounded-full shadow-lg transform transition-transform hover:scale-105 hover:bg-pink-700 focus:outline-none focus:ring-4 focus:ring-pink-300">
+                    Ready for your gifts? 🎁
+                </button>
+            </div>
+        </section>
+
+        <!-- STEP 5: Coupons -->
+        <section id="step-5" class="hidden min-h-screen p-4 md:p-8 flex items-center justify-center" onclick="event.stopPropagation()">
+            <div class="bg-white p-6 md:p-8 rounded-3xl shadow-2xl w-full max-w-4xl mx-auto my-8 animate-pop-in" style="max-height: 95vh; overflow-y: auto;">
+                <h2 class="cute-font text-5xl md:text-6xl text-purple-600 text-center mb-6">Your Official Birthday Gifts!</h2>
+                <p class="text-center text-gray-600 mb-6">Present these coupons to me any time (especially today!) to redeem.</p>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    
+                    <!-- Coupon 1 -->
+                    <div class="bg-pink-50 p-6 rounded-2xl border-4 border-dashed border-pink-300 flex items-center space-x-4">
+                        <div class="text-5xl">🎧</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-pink-700">"I'm All Ears" Lifetime Pass</h3>
+                            <p class="text-gray-600">Valid for life! I'll listen to everything you say, 100% judgment-free.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Coupon 2 -->
+                    <div class="bg-purple-50 p-6 rounded-2xl border-4 border-dashed border-purple-300 flex items-center space-x-4">
+                        <div class="text-5xl">✨</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-purple-700">One "Your Wish Is My Command"</h3>
+                            <p class="text-gray-600">Whatever you want, you can ask me. (Please be nice!)</p>
+                        </div>
+                    </div>
+
+                    <!-- Coupon 3 -->
+                    <div class="bg-pink-50 p-6 rounded-2xl border-4 border-dashed border-pink-300 flex items-center space-x-4">
+                        <div class="text-5xl">🚗</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-pink-700">Your Trip, Your Way</h3>
+                            <p class="text-gray-600">Wherever you want to go, we'll plan our next big date or adventure.</p>
+                        </div>
+                    </div>
+
+                    <!-- Coupon 4 -->
+                    <div class="bg-purple-50 p-6 rounded-2xl border-4 border-dashed border-purple-300 flex items-center space-x-4">
+                        <div class="text-5xl">👑</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-purple-700">One "Queen for the Day" Pass</h3>
+                            <p class="text-gray-600">A full day where I treat you like royalty. No requests denied!</p>
+                        </div>
+                    </div>
+
+                    <!-- Coupon 5 -->
+                    <div class="bg-pink-50 p-6 rounded-2xl border-4 border-dashed border-pink-300 flex items-center space-x-4">
+                        <div class="text-5xl">🧑‍🍳</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-pink-700">"Kulfi's Treat" Coupon</h3>
+                            <p class="text-gray-600">I will treat you to your absolute favorite meal from your favorite place.</p>
+                        </div>
+                    </div>
+
+                    <!-- Coupon 6 -->
+                    <div class="bg-purple-50 p-6 rounded-2xl border-4 border-dashed border-purple-300 flex items-center space-x-4">
+                        <div class="text-5xl">❤️</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-purple-700">Unlimited Hugs & Kisses</h3>
+                            <p class="text-gray-600">This coupon never expires and has unlimited redemptions.</p>
+                        </div>
+                    </div>
+
+                    <!-- Coupon 7 -->
+                    <div class="bg-pink-50 p-6 rounded-2xl border-4 border-dashed border-pink-300 flex items-center space-x-4">
+                        <div class="text-5xl">🍿</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-pink-700">Your Movie, Your Choice</h3>
+                            <p class="text-gray-600">You get to pick the movie, no complaints from me, I promise!</p>
+                        </div>
+                    </div>
+
+                    <!-- Coupon 8 -->
+                    <div class="bg-purple-50 p-6 rounded-2xl border-4 border-dashed border-purple-300 flex items-center space-x-4">
+                        <div class="text-5xl">🤝</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-purple-700">"Get Out of One Chore" Free</h3>
+                            <p class="text-gray-600">Have an assignment? I'll do my best to help you with it, no questions asked.</p>
+                        </div>
+                    </div>
+
+                    <!-- Coupon 9 -->
+                    <div class="bg-pink-50 p-6 rounded-2xl border-4 border-dashed border-pink-300 flex items-center space-x-4">
+                        <div class="text-5xl">🎵</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-pink-700">DJ for the Day</h3>
+                            <p class="text-gray-600">You control all the music, whether we're walking, or hanging out.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Coupon 10 -->
+                    <div class="bg-purple-50 p-6 rounded-2xl border-4 border-dashed border-purple-300 flex items-center space-x-4">
+                        <div class="text-5xl">🍦</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-purple-700">Emergency Ice Cream</h3>
+                            <p class="text-gray-600">Redeemable for your favorite ice cream, any time, any day.</p>
+                        </div>
+                    </div>
+
+                    <!-- Coupon 11 -->
+                    <div class="bg-pink-50 p-6 rounded-2xl border-4 border-dashed border-pink-300 flex items-center space-x-4">
+                        <div class="text-5xl">💖</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-pink-700">One "Day of Yes"</h3>
+                            <p class="text-gray-600">For 24 hours, I will say "Yes" to (almost) anything you ask.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Coupon 12 -->
+                    <div class="bg-purple-50 p-6 rounded-2xl border-4 border-dashed border-purple-300 flex items-center space-x-4">
+                        <div class="text-5xl">🍜</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-purple-700">One "Bunk a Class" Pass</h3>
+                            <p class="text-gray-600">We pick one boring class and go get momos or street food instead.</p>
+                        </div>
+                    </div>
+
+                    <!-- Coupon 13 -->
+                    <div class="bg-pink-50 p-6 rounded-2xl border-4 border-dashed border-pink-300 flex items-center space-x-4">
+                        <div class="text-5xl">🎧</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-pink-700">Headphones Share Session</h3>
+                            <p class="text-gray-600">We'll sit in the college garden & listen to your new favorite playlist.</p>
+                        </div>
+                    </div>
+
+                    <!-- Coupon 14 -->
+                    <div class="bg-purple-50 p-6 rounded-2xl border-4 border-dashed border-purple-300 flex items-center space-x-4">
+                        <div class="text-5xl">🛍️</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-purple-700">Your Personal Shopper</h3>
+                            <p class="text-gray-600">I will go shopping with you for as long as you want. No complaints!</p>
+                        </div>
+                    </div>
+
+                    <!-- Coupon 15 -->
+                    <div class="bg-pink-50 p-6 rounded-2xl border-4 border-dashed border-pink-300 flex items-center space-x-4">
+                        <div class="text-5xl">🤐</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-pink-700">"I Win This Argument" Card</h3>
+                            <p class="text-gray-600">A one-time-use card to automatically win any silly argument.</p>
+                        </div>
+                    </div>
+
+                    <!-- Coupon 16 -->
+                    <div class="bg-purple-50 p-6 rounded-2xl border-4 border-dashed border-purple-300 flex items-center space-x-4">
+                        <div class="text-5xl">🍕</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-purple-700">"Your Choice" Lunch</h3>
+                            <p class="text-gray-600">You pick the spot, my treat. Even the one I "don't like".</p>
+                        </div>
+                    </div>
+
+                    <!-- Coupon 17 -->
+                    <div class="bg-pink-50 p-6 rounded-2xl border-4 border-dashed border-pink-300 flex items-center space-x-4">
+                        <div class="text-5xl">📚</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-pink-700">A "No-Study" Evening</h3>
+                            <p class="text-gray-600">One evening where we are not allowed to talk about exams or assignments. Just us.</p>
+                        </div>
+                    </div>
+
+                    <!-- Coupon 18 -->
+                    <div class="bg-purple-50 p-6 rounded-2xl border-4 border-dashed border-purple-300 flex items-center space-x-4">
+                        <div class="text-5xl">🎤</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-purple-700">One Private Concert</h3>
+                            <p class="text-gray-600">Redeem this for me to sing your favorite song (or try my best!), just for you.</p>
+                        </div>
+                    </div>
+
+                    <!-- Coupon 19 -->
+                    <div class="bg-pink-50 p-6 rounded-2xl border-4 border-dashed border-pink-300 flex items-center space-x-4">
+                        <div class="text-5xl">🚶‍♀️</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-pink-700">The Long Walk</h3>
+                            <p class="text-gray-600">Redeem this for me to walk with you anywhere, no matter how long it takes.</p>
+                        </div>
+                    </div>
+
+                    <!-- Coupon 20 -->
+                    <div class="bg-purple-50 p-6 rounded-2xl border-4 border-dashed border-purple-300 flex items-center space-x-4">
+                        <div class="text-5xl">🧸</div>
+                        <div>
+                            <h3 class="font-bold text-xl text-purple-700">Giant Teddy Bear Hug</h3>
+                            <p class="text-gray-600">Redeemable for one extra-long, 60-second squeeze. Anytime.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <button 
+                    onclick="showStep('step-6')" 
+                    class="mt-8 w-full py-3 px-8 bg-purple-600 text-white text-xl font-bold rounded-full shadow-lg transform transition-transform hover:scale-105 hover:bg-purple-700 focus:outline-none focus:ring-4 focus:ring-purple-300">
+                    One last thing... ❤️
+                </button>
+            </div>
+        </section>
+
+        <!-- STEP 6: Final Message -->
+        <section id="step-6" class="hidden flex-col items-center justify-center min-h-screen p-6 text-center">
+            
+            <!-- Raining Hearts -->
+            <div class="absolute top-0 left-0 w-full h-full pointer-events-none">
+                <div class="heart">💖</div>
+                <div class="heart">❤️</div>
+                <div class="heart">💕</div>
+                <div class="heart">💓</div>
+                <div class="heart">💗</div>
+                <div class="heart">💖</div>
+                <div class="heart">❤️</div>
+                <div class="heart">💕</div>
+                <div class="heart">💓</div>
+            </div>
+            
+            <div class="bg-white p-8 md:p-12 rounded-3xl shadow-2xl max-w-lg w-full z-10 animate-pop-in">
+                <h1 class="cute-font text-6xl md:text-8xl text-pink-600">I Love You!</h1>
+                <p class="text-2xl md:text-3xl text-gray-600 mt-4">Happy Birthday, my beautiful doll.</p>
+                <p class="text-xl text-gray-500 mt-6">You are my today and all of my tomorrows. Thank you for being you.</p>
+                
+                <button 
+                    onclick="showStep('step-7')" 
+                    class="mt-8 py-3 px-8 bg-pink-600 text-white text-xl font-bold rounded-full shadow-lg transform transition-transform hover:scale-110 hover:bg-pink-700 focus:outline-none focus:ring-4 focus:ring-pink-300">
+                    Click here
+                </button>
+
+                <!-- NEW: Animated Infinity Logo -->
+                <svg class="infinity-svg mx-auto" viewBox="0 0 150 100" xmlns="http://www.w3.org/2000/svg">
+                    <path class="infinity-path" d="M 25 50 C 25 25, 75 25, 75 50 S 125 75, 125 50 C 125 25, 75 25, 75 50 S 25 75, 25 50" />
+                </svg>
+            </div>
+        </section>
+
+        <!-- STEP 7: Interactive Black Screen -->
+        <section id="step-7" class="hidden flex-col items-center justify-center min-h-screen p-6 text-center bg-black cursor-crosshair" onclick="event.stopPropagation()">
+            <!-- Raining Hearts -->
+            <div class="absolute top-0 left-0 w-full h-full pointer-events-none">
+                <div class="heart">💖</div>
+                <div class="heart">❤️</div>
+                <div class="heart">💕</div>
+                <div class="heart">💓</div>
+                <div class="heart">💗</div>
+                <div class="heart">💖</div>
+                <div class="heart">❤️</div>
+                <div class="heart">💕</div>
+                <div class="heart">💓</div>
+            </div>
+            
+            <div classs="z-10 animate-pop-in">
+                <h1 class="cute-font text-6xl md:text-8xl text-pink-500">I Love You</h1>
+                <p class="text-2xl md:text-3xl text-white mt-4">Forever and Always, My Love</p>
+                <p class="text-lg text-gray-300 mt-8">(Touch or slide anywhere)</p>
+            </div>
+        </section>
+
     </div>
-    <div class="photo">
-      <img src="photo2.jpg" alt="Trip Memory" />
-      <p class="caption">That insane trip to Puri where we got soaked and laughed for an hour straight.</p>
-    </div>
-    <div class="photo">
-      <img src="photo3.jpg" alt="Memory Three" />
-      <p class="caption">Our sunset ride on the motorcycle, the wind and your smile unforgettable.</p>
-    </div>
-    <div class="photo">
-      <img src="photo4.jpg" alt="Memory Four" />
-      <p class="caption">Your first victory in Valorant; I was so proud.</p>
-    </div>
-    <div class="photo">
-      <img src="photo5.jpg" alt="Memory Five" />
-      <p class="caption">Cooking together in the kitchen, our little disaster turned laughter.</p>
-    </div>
-  </div>
-  <div id="hearHeartBtn" class="cta-btn hidden" tabindex="0">Hear My Heart</div>
-</div>
 
-<!-- Step 4: The Song Dedication -->
-<div id="step4" class="step">
-  <h2 class="center-text">A Song Dedication</h2>
-  <p class="center-text">Close your eyes, my love. This is a song that always reminds me of you.</p>
-  <audio id="audioPlayer" controls preload="auto" style="width:100%; max-width: 600px; display:block; margin: auto;">
-    <source src="favorite-song.mp3" type="audio/mp3" />
-    Your browser does not support the audio element.
-  </audio>
-  <div id="nextToPromise" class="cta-btn hidden" tabindex="0">Future Promises Await</div>
-</div>
+    <script>
+        let isDrawing = false;
+        
+        function showStep(stepId) {
+            // Hide all sections first
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.add('hidden');
+            });
 
-<!-- Step 5: The Future Promise -->
-<div id="step5" class="step">
-  <h2 class="center-text">Three Promises for Our Future</h2>
-  <div class="promises">
-    <div class="promise-card" id="promise1" tabindex="0">
-      <h3>Escape</h3>
-      <p>Tap to Flip &amp; Reveal</p>
-      <div class="flip-content hidden" id="flip1">
-        A fully planned, surprise weekend getaway to Daringbadi — just for you.
-      </div>
-    </div>
-    <div class="promise-card" id="promise2" tabindex="0">
-      <h3>Pamper</h3>
-      <p>Tap to Flip &amp; Reveal</p>
-      <div class="flip-content hidden" id="flip2">
-        One entire 'You-Day' where we do only what you love, from breakfast to bedtime (no complaining allowed!).
-      </div>
-    </div>
-    <div class="promise-card" id="promise3" tabindex="0">
-      <h3>Bucket List</h3>
-      <p>Tap to Flip &amp; Reveal</p>
-      <div class="flip-content hidden" id="flip3">
-        I promise to finally get serious about learning to cook your favorite dish with you.
-      </div>
-    </div>
-  </div>
-  <p id="finalMessage">Shraddha Suhani, you are my everything. I made this digital adventure to show you a piece of my heart. Now, for the real surprise...</p>
-  <p id="finalInstruction">LOOK UNDER YOUR PILLOW OR CHECK THE KITCHEN COUNTER! HAPPY BIRTHDAY, MY LOVE!</p>
-  <p id="signOff">- Your [Nickname]</p>
-</div>
+            // Show the target section
+            const nextStep = document.getElementById(stepId);
+            if (nextStep) {
+                nextStep.classList.remove('hidden');
+                // Re-apply animation class to trigger it
+                nextStep.classList.remove('animate-pop-in');
+                void nextStep.offsetWidth; // Force reflow
+                nextStep.classList.add('animate-pop-in');
 
-<script>
-  // Navigation between steps
-  const steps = ['step1', 'step2', 'step3', 'step4', 'step5'];
-  function showStep(stepId) {
-    steps.forEach(id => document.getElementById(id).classList.remove('active'));
-    document.getElementById(stepId).classList.add('active');
-  }
+                // If it's the gallery, trigger staggered image animations
+                if (stepId === 'step-4') { 
+                    const items = nextStep.querySelectorAll('.gallery-item');
+                    items.forEach((item, index) => {
+                        item.style.animation = 'none';
+                        void item.offsetWidth; // Trigger reflow
+                        item.style.animation = null; 
+                        item.style.animationDelay = `${index * 0.1}s`;
+                    });
+                }
 
-  // Step 1 start
-  document.getElementById('startBtn').addEventListener('click', () => {
-    showStep('step2');
-  });
+                // If it's the final interactive step, add event listeners
+                if (stepId === 'step-7') {
+                    addDrawingListeners();
+                } else {
+                    removeDrawingListeners();
+                }
+            }
+        }
 
-  // Step 2: Check secret answer
-  document.getElementById('checkAnswerBtn').addEventListener('click', () => {
-    const input = document.getElementById('secretInput').value.trim().toLowerCase();
-    const errorMsg = document.getElementById('errorMsg');
-    if (input === 'kulfi') {
-      errorMsg.style.display = 'none';
-      showStep('step3');
-    } else {
-      errorMsg.style.display = 'block';
-    }
-  });
+        function checkAnswer() {
+            const answerInput = document.getElementById('secret-answer');
+            const answer = answerInput.value.trim().toLowerCase();
+            const correctAnswers = ['me', 'doll', 'shraddha', 'wiffey'];
+            const errorMessage = document.getElementById('error-message');
+            const lockBox = document.getElementById('lock-box');
 
-  // Step 3: Reveal Hear Heart button after scrolling gallery to the end
-  const gallery = document.getElementById('gallery');
-  const hearHeartBtn = document.getElementById('hearHeartBtn');
-  hearHeartBtn.addEventListener('click', () => {
-    showStep('step4');
-  });
-  gallery.addEventListener('scroll', () => {
-    if (gallery.scrollLeft + gallery.offsetWidth >= gallery.scrollWidth - 5) {
-      hearHeartBtn.classList.remove('hidden');
-    }
-  });
+            if (correctAnswers.includes(answer)) {
+                errorMessage.textContent = '';
+                showStep('step-3'); // Correctly shows the message
+                answerInput.value = ''; // Clear input
+            } else {
+                errorMessage.textContent = 'Awww, try again! 😉';
+                lockBox.classList.remove('animate-shake');
+                void lockBox.offsetWidth; // Trigger reflow
+                lockBox.classList.add('animate-shake');
+            }
+        }
 
-  // Step 4: Show next when audio ends
-  const audioPlayer = document.getElementById('audioPlayer');
-  const nextToPromiseBtn = document.getElementById('nextToPromise');
-  audioPlayer.addEventListener('ended', () => {
-    nextToPromiseBtn.classList.remove('hidden');
-  });
-  nextToPromiseBtn.addEventListener('click', () => {
-    showStep('step5');
-  });
+        function createEmoji(x, y) {
+            const emojiEl = document.createElement('div');
+            emojiEl.className = 'popup-emoji';
+            emojiEl.style.left = `${x}px`;
+            emojiEl.style.top = `${y}px`;
+            
+            // Expanded list of cute emojis
+            const lovelyEmojis = ['💖', '💕', '❤️', '💓', '💗', '💞', '💝', '🫶', '✨', '🥰', '💫', '🌟', '🌸', '🌼', '😘', '💌'];
+            emojiEl.innerHTML = lovelyEmojis[Math.floor(Math.random() * lovelyEmojis.length)];
 
-  // Step 5: Promise card flip on click or keyboard "Enter"
-  document.querySelectorAll('.promise-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const flipContent = card.querySelector('.flip-content');
-      flipContent.classList.toggle('hidden');
-    });
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        const flipContent = card.querySelector('.flip-content');
-        flipContent.classList.toggle('hidden');
-      }
-    });
-  });
-</script>
+            // Append to the step-7 section
+            document.getElementById('step-7').appendChild(emojiEl);
 
+            // Trigger fade out
+            setTimeout(() => {
+                emojiEl.classList.add('fade-out');
+            }, 100); // Start fading almost immediately
+
+            // Remove from DOM after animation
+            setTimeout(() => {
+                emojiEl.remove();
+            }, 600); // 100ms + 500ms transition
+        }
+        
+        // --- Event handler functions ---
+        function handleDrawStart(e) {
+            isDrawing = true;
+            // For click/tap
+            const x = e.clientX || (e.touches && e.touches[0].clientX);
+            const y = e.clientY || (e.touches && e.touches[0].clientY);
+            createEmoji(x, y);
+        }
+        
+        function handleDrawMove(e) {
+            if (!isDrawing) return;
+            e.preventDefault(); // Prevent scrolling while drawing
+            const x = e.clientX || (e.touches && e.touches[0].clientX);
+            const y = e.clientY || (e.touches && e.touches[0].clientY);
+            // Throttle emoji creation slightly
+            createEmoji(x, y);
+        }
+        
+        function handleDrawEnd() {
+            isDrawing = false;
+        }
+
+        const step7 = document.getElementById('step-7');
+        
+        // --- Functions to add/remove listeners ---
+        function addDrawingListeners() {
+            // Mouse events
+            step7.addEventListener('mousedown', handleDrawStart);
+            step7.addEventListener('mousemove', handleDrawMove);
+            step7.addEventListener('mouseup', handleDrawEnd);
+            step7.addEventListener('mouseleave', handleDrawEnd); // Stop if mouse leaves area
+            
+            // Touch events
+            step7.addEventListener('touchstart', handleDrawStart, { passive: false });
+            step7.addEventListener('touchmove', handleDrawMove, { passive: false });
+            step7.addEventListener('touchend', handleDrawEnd);
+        }
+
+        function removeDrawingListeners() {
+            // Mouse events
+            step7.removeEventListener('mousedown', handleDrawStart);
+            step7.removeEventListener('mousemove', handleDrawMove);
+            step7.removeEventListener('mouseup', handleDrawEnd);
+            step7.removeEventListener('mouseleave', handleDrawEnd);
+            
+            // Touch events
+            step7.removeEventListener('touchstart', handleDrawStart);
+            step7.removeEventListener('touchmove', handleDrawMove);
+            step7.removeEventListener('touchend', handleDrawEnd);
+        }
+
+    </script>
 </body>
 </html>
+
