@@ -1,865 +1,361 @@
-
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adeduro Akintade - Web3 Community Builder & Moderator</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0a0e27;
-            color: #e0e7ff;
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        /* Neon Glow Effects (ADJUSTED for CYN) */
-        .glow-cyan {
-            text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00d9ff;
-        }
-
-        .glow-pink {
-            text-shadow: 0 0 10px #ff0080, 0 0 20px #ff0080, 0 0 30px #ff0080, 0 0 40px #ff006e;
-        }
-
-        .glow-purple {
-            text-shadow: 0 0 10px #bf00ff, 0 0 20px #bf00ff, 0 0 30px #bf00ff;
-        }
-
-        .glow-box-cyan {
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4), 0 0 40px rgba(0, 255, 255, 0.2), inset 0 0 10px rgba(0, 255, 255, 0.1);
-        }
-
-        .glow-box-pink {
-            box-shadow: 0 0 20px rgba(255, 0, 128, 0.4), 0 0 40px rgba(255, 0, 128, 0.2), inset 0 0 10px rgba(255, 0, 128, 0.1);
-        }
-
-        .glow-box-purple {
-            box-shadow: 0 0 20px rgba(191, 0, 255, 0.4), 0 0 40px rgba(191, 0, 255, 0.2);
-        }
-
-        .glow-border-cyan {
-            border: 2px solid #00ffff;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5), inset 0 0 15px rgba(0, 255, 255, 0.1);
-        }
-
-        .glow-border-pink {
-            border: 2px solid #ff0080;
-            box-shadow: 0 0 15px rgba(255, 0, 128, 0.5), inset 0 0 15px rgba(255, 0, 128, 0.1);
-        }
-
-        .glow-border-purple {
-            border: 2px solid #bf00ff;
-            box-shadow: 0 0 15px rgba(191, 0, 255, 0.5), inset 0 0 15px rgba(191, 0, 255, 0.1);
-        }
-
-        /* Gradient Border Animation */
-        .gradient-border {
-            position: relative;
-            background: linear-gradient(145deg, rgba(26, 31, 58, 0.8), rgba(15, 20, 45, 0.9));
-            border: 2px solid transparent;
-            background-clip: padding-box;
-        }
-
-        .gradient-border::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #00ffff, #ff0080, #bf00ff, #00ffff);
-            border-radius: inherit;
-            z-index: -1;
-            opacity: 0.6;
-            background-size: 300% 300%;
-            animation: gradient-shift 6s ease infinite;
-        }
-
-        @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        /* Pulse Animations */
-        @keyframes pulse-glow {
-            0%, 100% { 
-                box-shadow: 0 0 20px rgba(0, 255, 255, 0.4), 0 0 40px rgba(0, 255, 255, 0.2);
-            }
-            50% { 
-                box-shadow: 0 0 30px rgba(0, 255, 255, 0.6), 0 0 60px rgba(0, 255, 255, 0.3);
-            }
-        }
-
-        @keyframes pulse-glow-pink {
-            0%, 100% { 
-                box-shadow: 0 0 20px rgba(255, 0, 128, 0.4), 0 0 40px rgba(255, 0, 128, 0.2);
-            }
-            50% { 
-                box-shadow: 0 0 30px rgba(255, 0, 128, 0.6), 0 0 60px rgba(255, 0, 128, 0.3);
-            }
-        }
-
-        .pulse-glow {
-            animation: pulse-glow 3s ease-in-out infinite;
-        }
-
-        .pulse-glow-pink {
-            animation: pulse-glow-pink 3s ease-in-out infinite;
-        }
-
-        /* Glass Morphism */
-        .glass {
-            background: rgba(26, 31, 58, 0.6);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-
-        .glass-strong {
-            background: rgba(26, 31, 58, 0.8);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-        }
-
-        /* Chart Container */
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-            max-height: 400px;
-        }
-        
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 350px;
-            }
-        }
-
-        /* Background Canvas */
-        #background-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-        }
-
-        /* Skill Cards Hover */
-        .skill-card {
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.6), 0 0 60px rgba(0, 255, 255, 0.3);
-        }
-
-        /* Timeline Styles */
-        .timeline-line {
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, #00ffff, #ff0080, #bf00ff);
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-            transform: translateX(-50%);
-        }
-
-        .timeline-dot {
-            box-shadow: 0 0 20px currentColor;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.1); }
-        }
-
-        .timeline-card {
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .timeline-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.6), 0 0 60px rgba(0, 255, 255, 0.3);
-        }
-
-        /* Button Styles */
-        .cyber-btn {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .cyber-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .cyber-btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        /* Scanline Effect */
-        .scanline::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(
-                to bottom,
-                transparent 50%,
-                rgba(0, 255, 255, 0.03) 51%
-            );
-            background-size: 100% 4px;
-            pointer-events: none;
-            animation: scanline 8s linear infinite;
-        }
-
-        @keyframes scanline {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 100%; }
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #0a0e27;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #00ffff, #ff0080);
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, #00d9ff, #ff006e);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .timeline-line {
-                left: 30px;
-            }
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Happy Birthday Shraddha Suhani</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: #fff0f6;
+    color: #3a3a3a;
+    overflow-x: hidden;
+  }
+  header {
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.6rem;
+    padding: 1rem 0 0.5rem 0;
+    color: #d6336c;
+  }
+  #step1 video {
+    width: 100vw;
+    height: auto;
+    display: block;
+  }
+  .center-text {
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.1rem;
+  }
+  .cta-btn {
+    display: block;
+    background: #ff4d6d;
+    width: 200px;
+    margin: 1rem auto 2rem auto;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.2rem;
+    color: white;
+    border-radius: 50px;
+    cursor: pointer;
+    animation: pulse 2s infinite;
+    user-select: none;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 77, 109, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 77, 109, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 77, 109, 0); }
+  }
+  .step {
+    display: none;
+    padding: 1rem 1rem 4rem 1rem;
+  }
+  .step.active {
+    display: block;
+  }
+  .lock-img {
+    display: block;
+    margin: 0.5rem auto 1rem auto;
+    width: 80px;
+  }
+  .challenge-text {
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  input[type="text"] {
+    display: block;
+    margin: 0 auto;
+    padding: 0.8rem;
+    width: 80%;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: 1.5px solid #d6336c;
+    outline: none;
+  }
+  button {
+    display: block;
+    margin: 1rem auto;
+    background-color: #d6336c;
+    color: white;
+    font-size: 1.1rem;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+  }
+  #errorMsg {
+    text-align: center;
+    color: #d6336c;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    display: none;
+  }
+  /* Gallery styles */
+  .gallery {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+    padding-bottom: 1rem;
+  }
+  .gallery::-webkit-scrollbar {
+    height: 5px;
+  }
+  .gallery::-webkit-scrollbar-thumb {
+    background: #ff4d6d;
+    border-radius: 10px;
+  }
+  .photo {
+    scroll-snap-align: start;
+    min-width: 80vw;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(214, 51, 108, 0.3);
+  }
+  .photo img {
+    width: 100%;
+    border-radius: 15px 15px 0 0;
+  }
+  .caption {
+    background: #fff0f6;
+    padding: 0.8rem 1rem;
+    border-radius: 0 0 15px 15px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #b03a5b;
+  }
+  #hearHeartBtn {
+    margin-top: 1rem;
+  }
+  /* Dedication */
+  #step4 p {
+    font-size: 1.1rem;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #d6336c;
+  }
+  audio {
+    width: 95%;
+    display: block;
+    margin: 0 auto 1.5rem auto;
+  }
+  /* Promise cards */
+  .promises {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .promise-card {
+    background: #ffcedd;
+    border-radius: 15px;
+    padding: 1rem;
+    box-shadow: 0 3px 6px rgba(214, 51, 108, 0.4);
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.3s ease;
+  }
+  .promise-card:hover {
+    transform: scale(1.05);
+  }
+  .promise-card h3 {
+    margin: 0 0 0.3rem 0;
+    color: #9b184f;
+  }
+  .promise-card p {
+    margin: 0;
+    font-weight: 600;
+    color: #7a1658;
+  }
+  .flip-content {
+    margin-top: 0.5rem;
+    font-weight: normal;
+    color: #b33a48;
+  }
+  .hidden {
+    display: none;
+  }
+  #finalMessage {
+    font-family: 'Brush Script MT', cursive;
+    font-size: 1.6rem;
+    text-align: center;
+    margin-top: 2rem;
+    color: #d6336c;
+  }
+  #finalInstruction {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    color: #9b184f;
+  }
+  #signOff {
+    text-align: right;
+    margin-top: 2rem;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: #6b1947;
+  }
+</style>
 </head>
-<body class="bg-[#0a0e27] text-[#e0e7ff]">
-    <canvas id="background-canvas"></canvas>
+<body>
 
-    <header class="glass sticky top-0 z-50 border-b border-cyan-500/30 scanline">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-3xl font-bold text-cyan-400 glow-cyan">
-                AA
-            </div>
-            <div class="hidden md:flex space-x-6 items-center">
-                <a href="#profile" class="text-cyan-400 hover:text-pink-500 transition duration-300 glow-cyan">Profile</a>
-                <a href="#skills" class="text-cyan-400 hover:text-pink-500 transition duration-300 glow-cyan">Skills</a>
-                <a href="#experience" class="text-cyan-400 hover:text-pink-500 transition duration-300 glow-cyan">Experience</a>
-                <a href="#contact" class="cyber-btn bg-gradient-to-r from-cyan-500 to-pink-500 text-white px-6 py-2 rounded-full glow-box-cyan hover:glow-box-pink transition duration-300 font-semibold">Contact</a>
-            </div>
-            <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-cyan-400 focus:outline-none glow-cyan">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                </button>
-            </div>
-        </nav>
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 glass-strong">
-            <a href="#profile" class="block py-2 text-cyan-400 hover:text-pink-500 glow-cyan">Profile</a>
-            <a href="#skills" class="block py-2 text-cyan-400 hover:text-pink-500 glow-cyan">Skills</a>
-            <a href="#experience" class="block py-2 text-cyan-400 hover:text-pink-500 glow-cyan">Experience</a>
-            <a href="#contact" class="block mt-2 text-center cyber-btn bg-gradient-to-r from-cyan-500 to-pink-500 text-white px-6 py-2 rounded-full glow-box-cyan font-semibold">Contact</a>
-        </div>
-    </header>
+<!-- Step 1: Invitation -->
+<div id="step1" class="step active">
+  <header>Happy Birthday, My Love</header>
+  <video autoplay muted playsinline loop>
+    <source src="waving-video.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+  <p class="center-text">Welcome to Shraddha-land, a place made just for you. This adventure is dedicated to The Story of Us.</p>
+  <div id="startBtn" class="cta-btn" tabindex="0">Start the Adventure</div>
+</div>
 
-    <main class="container mx-auto px-6 py-12">
+<!-- Step 2: The Lock -->
+<div id="step2" class="step">
+  <img src="lock.png" alt="Lock Image" class="lock-img" />
+  <p class="challenge-text">Only the one who knows our secrets can unlock this next surprise. What was the name you had given when we met first time before exam?</p>
+  <input type="text" id="secretInput" placeholder="Enter your answer" autocomplete="off" />
+  <button id="checkAnswerBtn">Unlock</button>
+  <p id="errorMsg">Hmm, try again, darling. Think back to that funny spill!</p>
+</div>
 
-        <section id="hero" class="text-center py-20">
-            <h1 class="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-pink-500 to-purple-500 pb-2 glow-cyan">
-                Adeduro Akintade
-            </h1>
-            <p class="text-xl md:text-2xl text-cyan-300 mt-4 glow-cyan">Web3 Community Builder & Moderator</p>
-            <div class="mt-6 flex justify-center gap-4">
-                <div class="h-1 w-20 bg-gradient-to-r from-cyan-400 to-transparent rounded-full glow-box-cyan"></div>
-                <div class="h-1 w-20 bg-gradient-to-r from-pink-500 to-transparent rounded-full glow-box-pink"></div>
-            </div>
-        </section>
+<!-- Step 3: The Memory Vault -->
+<div id="step3" class="step">
+  <h2 class="center-text">Our Adventures: A Memory Scroll</h2>
+  <div class="gallery" id="gallery">
+    <div class="photo">
+      <img src="photo1.jpg" alt="Favorite Dish" />
+      <p class="caption">The day you taught me to love your favorite dish.</p>
+    </div>
+    <div class="photo">
+      <img src="photo2.jpg" alt="Trip Memory" />
+      <p class="caption">That insane trip to Puri where we got soaked and laughed for an hour straight.</p>
+    </div>
+    <div class="photo">
+      <img src="photo3.jpg" alt="Memory Three" />
+      <p class="caption">Our sunset ride on the motorcycle, the wind and your smile unforgettable.</p>
+    </div>
+    <div class="photo">
+      <img src="photo4.jpg" alt="Memory Four" />
+      <p class="caption">Your first victory in Valorant; I was so proud.</p>
+    </div>
+    <div class="photo">
+      <img src="photo5.jpg" alt="Memory Five" />
+      <p class="caption">Cooking together in the kitchen, our little disaster turned laughter.</p>
+    </div>
+  </div>
+  <div id="hearHeartBtn" class="cta-btn hidden" tabindex="0">Hear My Heart</div>
+</div>
 
-        <section id="profile" class="py-16">
-            <div class="max-w-4xl mx-auto glass-strong p-8 rounded-2xl glow-border-cyan">
-                <h2 class="text-3xl font-bold text-center mb-6 text-cyan-400 glow-cyan">Professional Profile</h2>
-                <p class="text-lg text-gray-300 leading-relaxed text-center">
-                    Dedicated Web3 builder with experience in WEB 3 Ecosystem and online community management. Skilled in fostering engaging environments, enhancing user experiences, and leveraging knowledge of DAO, DeFi, and blockchain systems. Strong communicator with a proven track record in moderating and growing communities.
-                </p>
-            </div>
-        </section>
-        
-        <section class="py-16 grid md:grid-cols-2 gap-12 items-center">
-            <div class="glass-strong p-8 rounded-2xl glow-border-pink text-center pulse-glow-pink">
-                <h3 class="text-2xl font-bold mb-4 text-pink-400 glow-pink">Key Achievement</h3>
-                <p class="text-gray-300 mb-4">Grew community engagement at Bolana from 37 members to over:</p>
-                <div id="subscriber-count" class="text-7xl font-bold text-pink-500 glow-pink" data-target="2000">0</div>
-                <p class="text-cyan-300 mt-2 text-xl">Members in One Month</p>
-            </div>
-            <div class="glass-strong p-8 rounded-2xl glow-border-cyan">
-                <h3 class="text-2xl font-bold mb-6 text-center text-cyan-400 glow-cyan">Experience Overview</h3>
-                <p class="text-center text-gray-300 mb-4">Distribution of professional roles across Web3 ecosystem</p>
-                <div class="chart-container">
-                    <canvas id="experienceChart"></canvas>
-                </div>
-            </div>
-        </section>
+<!-- Step 4: The Song Dedication -->
+<div id="step4" class="step">
+  <h2 class="center-text">A Song Dedication</h2>
+  <p class="center-text">Close your eyes, my love. This is a song that always reminds me of you.</p>
+  <audio id="audioPlayer" controls preload="auto" style="width:100%; max-width: 600px; display:block; margin: auto;">
+    <source src="favorite-song.mp3" type="audio/mp3" />
+    Your browser does not support the audio element.
+  </audio>
+  <div id="nextToPromise" class="cta-btn hidden" tabindex="0">Future Promises Await</div>
+</div>
 
-        <section id="skills" class="py-16">
-            <h2 class="text-3xl font-bold text-center mb-12 text-cyan-400 glow-cyan">Core Competencies</h2>
-            <p class="text-center max-w-3xl mx-auto text-gray-300 mb-12">Versatile skill set focused on community building, strategic planning, and creative problem-solving in the Web3 space.</p>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <div class="skill-card glass-strong p-6 rounded-xl text-center glow-border-cyan">
-                    <div class="text-4xl mb-3">📊</div>
-                    <h3 class="font-semibold text-cyan-300">Project Management</h3>
-                </div>
-                <div class="skill-card glass-strong p-6 rounded-xl text-center glow-border-cyan">
-                    <div class="text-4xl mb-3">💪</div>
-                    <h3 class="font-semibold text-cyan-300">Confidence</h3>
-                </div>
-                <div class="skill-card glass-strong p-6 rounded-xl text-center glow-border-cyan">
-                    <div class="text-4xl mb-3">🤝</div>
-                    <h3 class="font-semibold text-cyan-300">Networking</h3>
-                </div>
-                <div class="skill-card glass-strong p-6 rounded-xl text-center glow-border-cyan">
-                    <div class="text-4xl mb-3">🔄</div>
-                    <h3 class="font-semibold text-cyan-300">Cooperation</h3>
-                </div>
-                <div class="skill-card glass-strong p-6 rounded-xl text-center glow-border-cyan">
-                    <div class="text-4xl mb-3">🎯</div>
-                    <h3 class="font-semibold text-cyan-300">Adaptability</h3>
-                </div>
-                <div class="skill-card glass-strong p-6 rounded-xl text-center glow-border-cyan">
-                    <div class="text-4xl mb-3">📋</div>
-                    <h3 class="font-semibold text-cyan-300">Organisation</h3>
-                </div>
-                <div class="skill-card glass-strong p-6 rounded-xl text-center glow-border-cyan">
-                    <div class="text-4xl mb-3">🌍</div>
-                    <h3 class="font-semibold text-cyan-300">Community Engagement</h3>
-                </div>
-            </div>
-        </section>
-        
-        <section id="education" class="py-16">
-            <h2 class="text-3xl font-bold text-center mb-6 text-purple-400 glow-purple">Education & Training</h2>
-            <div class="max-w-lg mx-auto glass-strong p-8 rounded-2xl glow-border-purple text-center">
-                <ul class="text-lg space-y-3">
-                    <li class="text-gray-300">🎓 Ekiti State University</li>
-                    <li class="text-gray-300">📚 Propel Learning</li>
-                    <li class="text-gray-300">💼 Jobberman Softskills</li>
-                </ul>
-            </div>
-        </section>
+<!-- Step 5: The Future Promise -->
+<div id="step5" class="step">
+  <h2 class="center-text">Three Promises for Our Future</h2>
+  <div class="promises">
+    <div class="promise-card" id="promise1" tabindex="0">
+      <h3>Escape</h3>
+      <p>Tap to Flip &amp; Reveal</p>
+      <div class="flip-content hidden" id="flip1">
+        A fully planned, surprise weekend getaway to Daringbadi — just for you.
+      </div>
+    </div>
+    <div class="promise-card" id="promise2" tabindex="0">
+      <h3>Pamper</h3>
+      <p>Tap to Flip &amp; Reveal</p>
+      <div class="flip-content hidden" id="flip2">
+        One entire 'You-Day' where we do only what you love, from breakfast to bedtime (no complaining allowed!).
+      </div>
+    </div>
+    <div class="promise-card" id="promise3" tabindex="0">
+      <h3>Bucket List</h3>
+      <p>Tap to Flip &amp; Reveal</p>
+      <div class="flip-content hidden" id="flip3">
+        I promise to finally get serious about learning to cook your favorite dish with you.
+      </div>
+    </div>
+  </div>
+  <p id="finalMessage">Shraddha Suhani, you are my everything. I made this digital adventure to show you a piece of my heart. Now, for the real surprise...</p>
+  <p id="finalInstruction">LOOK UNDER YOUR PILLOW OR CHECK THE KITCHEN COUNTER! HAPPY BIRTHDAY, MY LOVE!</p>
+  <p id="signOff">- Your [Nickname]</p>
+</div>
 
-        <section id="experience" class="py-16">
-            <h2 class="text-3xl font-bold text-center mb-4 text-cyan-400 glow-cyan">Professional Experience</h2>
-            <p class="text-center max-w-3xl mx-auto text-gray-300 mb-12">Interactive timeline of Web3 community management and ambassador roles. Click on any role to see more details.</p>
-            <div class="flex justify-center space-x-4 mb-12 flex-wrap gap-2">
-                <button class="filter-btn cyber-btn bg-gradient-to-r from-cyan-500 to-pink-500 text-white px-6 py-2 rounded-full glow-box-cyan transition duration-300 font-semibold" data-filter="all">All</button>
-                <button class="filter-btn cyber-btn glass-strong text-cyan-300 px-6 py-2 rounded-full border border-cyan-500/50 hover:glow-box-cyan transition duration-300 font-semibold" data-filter="moderator">Moderator</button>
-                <button class="filter-btn cyber-btn glass-strong text-cyan-300 px-6 py-2 rounded-full border border-cyan-500/50 hover:glow-box-cyan transition duration-300 font-semibold" data-filter="ambassador">Ambassador</button>
-            </div>
-            <div id="timeline-container" class="relative max-w-3xl mx-auto">
-            </div>
-        </section>
+<script>
+  // Navigation between steps
+  const steps = ['step1', 'step2', 'step3', 'step4', 'step5'];
+  function showStep(stepId) {
+    steps.forEach(id => document.getElementById(id).classList.remove('active'));
+    document.getElementById(stepId).classList.add('active');
+  }
 
-        <section id="accomplishments" class="py-16">
-            <h2 class="text-3xl font-bold text-center mb-6 text-pink-400 glow-pink">Notable Achievements</h2>
-            <div class="max-w-3xl mx-auto glass-strong p-8 rounded-2xl glow-border-pink">
-                <ul class="space-y-4 text-lg">
-                    <li class="flex items-start">
-                        <span class="text-pink-500 mr-3 text-2xl glow-pink">🚀</span>
-                        <span class="text-gray-300">Grew community engagement at Bolana from 37 members to 2000 within a month</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="text-pink-500 mr-3 text-2xl glow-pink">🏆</span>
-                        <span class="text-gray-300">Recognized as "Top Moderator" for outstanding contribution in maintaining a safe environment</span>
-                    </li>
-                </ul>
-            </div>
-        </section>
+  // Step 1 start
+  document.getElementById('startBtn').addEventListener('click', () => {
+    showStep('step2');
+  });
 
-        <section id="contact" class="py-16 text-center glass-strong rounded-2xl glow-border-purple">
-            <h2 class="text-3xl font-bold mb-4 text-purple-400 glow-purple">Get In Touch</h2>
-            <p class="text-gray-300 mb-8 max-w-xl mx-auto">Open to discussing new Web3 projects, community management opportunities, and collaborations in the blockchain space.</p>
-            <div class="flex flex-wrap justify-center items-center gap-6 mb-8">
-                <a href="mailto:adeduroakintade@gmail.com" class="text-lg text-cyan-400 hover:text-pink-500 transition glow-cyan">adeduroakintade@gmail.com</a>
-                <span class="hidden md:block text-gray-600">|</span>
-                <p class="text-lg text-gray-300">+2348036370047</p>
-                <span class="hidden md:block text-gray-600">|</span>
-                <p class="text-lg text-gray-300">Nigeria</p>
-            </div>
-            <div class="flex justify-center flex-wrap gap-6 text-lg font-semibold">
-                <a href="https://t.me/adexboy0062" target="_blank" class="text-cyan-400 hover:text-pink-500 transition glow-cyan">
-                    📱 Telegram: @adexboy0062
-                </a>
-                <a href="https://x.com/adexboy10" target="_blank" class="text-cyan-400 hover:text-pink-500 transition glow-cyan">
-                    🐦 X: @adexboy10
-                </a>
-            </div>
-        </section>
-    </main>
+  // Step 2: Check secret answer
+  document.getElementById('checkAnswerBtn').addEventListener('click', () => {
+    const input = document.getElementById('secretInput').value.trim().toLowerCase();
+    const errorMsg = document.getElementById('errorMsg');
+    if (input === 'kulfi') {
+      errorMsg.style.display = 'none';
+      showStep('step3');
+    } else {
+      errorMsg.style.display = 'block';
+    }
+  });
 
-    <footer class="text-center py-6 text-gray-500 border-t border-cyan-500/20 scanline">
-        <p>&copy; 2025 Adeduro Akintade. All Rights Reserved.</p>
-    </footer>
+  // Step 3: Reveal Hear Heart button after scrolling gallery to the end
+  const gallery = document.getElementById('gallery');
+  const hearHeartBtn = document.getElementById('hearHeartBtn');
+  hearHeartBtn.addEventListener('click', () => {
+    showStep('step4');
+  });
+  gallery.addEventListener('scroll', () => {
+    if (gallery.scrollLeft + gallery.offsetWidth >= gallery.scrollWidth - 5) {
+      hearHeartBtn.classList.remove('hidden');
+    }
+  });
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Mobile Menu Toggle
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-            
-            // Experience Data (DATES REMOVED from the timeline period)
-            const experienceData = [
-                {
-                    role: "Community Moderator",
-                    company: "FLUFFY MEMECOIN",
-                    type: "moderator",
-                    period: "2023-2025",
-                    details: [
-                        "Moderated community discussions and maintained positive environment",
-                        "Enforced community guidelines and resolved conflicts"
-                    ]
-                },
-                {
-                    role: "Community Moderator",
-                    company: "BETY IGAMING CASINO",
-                    type: "moderator",
-                    period: "2023-2025",
-                    details: [
-                        "Managed gaming community interactions",
-                        "Provided support and moderation for casino platform users"
-                    ]
-                },
-                {
-                    role: "Community Manager",
-                    company: "BOLANA MEMECOIN",
-                    type: "moderator",
-                    period: "2023-2025",
-                    details: [
-                        "Grew community engagement from 37 members to 2000 within one month",
-                        "Developed and implemented community growth strategies",
-                        "Managed daily operations and user engagement initiatives"
-                    ]
-                },
-                {
-                    role: "Community Moderator",
-                    company: "STREAMDATAX",
-                    type: "moderator",
-                    period: "2023-2025",
-                    details: [
-                        "Moderated data streaming platform community",
-                        "Facilitated technical discussions and user support"
-                    ]
-                },
-                {
-                    role: "Community Moderator",
-                    company: "FREELANCE DAO",
-                    type: "moderator",
-                    period: "2023-2025",
-                    details: [
-                        "Managed DAO community governance discussions",
-                        "Supported decentralized decision-making processes"
-                    ]
-                },
-                {
-                    role: "Community Manager",
-                    company: "TYPEDIGITALAI",
-                    type: "moderator",
-                    period: "2023-2025",
-                    details: [
-                        "Led community management for AI-focused digital platform",
-                        "Coordinated community events and engagement campaigns"
-                    ]
-                },
-                {
-                    role: "Community Manager",
-                    company: "SUILAUNCH",
-                    type: "moderator",
-                    period: "2023-2025",
-                    details: [
-                        "Managed launch community for Sui blockchain project",
-                        "Coordinated marketing and community growth initiatives"
-                    ]
-                },
-                {
-                    role: "Community Moderator",
-                    company: "ARVADEX",
-                    type: "moderator",
-                    period: "2023-2025",
-                    details: [
-                        "Provided moderation and support for DEX community",
-                        "Assisted users with platform navigation and troubleshooting"
-                    ]
-                },
-                {
-                    role: "Community Moderator",
-                    company: "GTM LABS",
-                    type: "moderator",
-                    period: "2023-2025",
-                    details: [
-                        "Moderated tech-focused community discussions",
-                        "Supported product launches and user feedback collection"
-                    ]
-                },
-                {
-                    role: "Community Moderator",
-                    company: "RWAN",
-                    type: "moderator",
-                    period: "2023-2025",
-                    details: [
-                        "Managed community interactions and support",
-                        "Maintained positive and engaging environment"
-                    ]
-                },
-                {
-                    role: "Community Moderator",
-                    company: "DECENTER AIDC",
-                    type: "moderator",
-                    period: "2023-2025",
-                    details: [
-                        "Moderated AI and decentralization community",
-                        "Facilitated technical discussions and knowledge sharing"
-                    ]
-                },
-                {
-                    role: "Ambassador",
-                    company: "ALPHA BRIDGE",
-                    type: "ambassador",
-                    period: "2023-2025",
-                    details: [
-                        "Represented brand and promoted cross-chain bridge solutions",
-                        "Engaged with community and created awareness"
-                    ]
-                },
-                {
-                    role: "Ambassador",
-                    company: "SOLIDO",
-                    type: "ambassador",
-                    period: "2023-2025",
-                    details: [
-                        "Promoted Solana-based project to target audiences",
-                        "Created content and engaged with community members"
-                    ]
-                },
-                {
-                    role: "Ambassador",
-                    company: "FLIP FLOP",
-                    type: "ambassador",
-                    period: "2023-2025",
-                    details: [
-                        "Represented brand in various crypto communities",
-                        "Drove user acquisition and engagement"
-                    ]
-                },
-                {
-                    role: "Ambassador",
-                    company: "CUBANE",
-                    type: "ambassador",
-                    period: "2023-2025",
-                    details: [
-                        "Promoted project features and benefits",
-                        "Built relationships with community members and partners"
-                    ]
-                }
-            ];
+  // Step 4: Show next when audio ends
+  const audioPlayer = document.getElementById('audioPlayer');
+  const nextToPromiseBtn = document.getElementById('nextToPromise');
+  audioPlayer.addEventListener('ended', () => {
+    nextToPromiseBtn.classList.remove('hidden');
+  });
+  nextToPromiseBtn.addEventListener('click', () => {
+    showStep('step5');
+  });
 
-            const timelineContainer = document.getElementById('timeline-container');
-            const filterBtns = document.querySelectorAll('.filter-btn');
+  // Step 5: Promise card flip on click or keyboard "Enter"
+  document.querySelectorAll('.promise-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const flipContent = card.querySelector('.flip-content');
+      flipContent.classList.toggle('hidden');
+    });
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const flipContent = card.querySelector('.flip-content');
+        flipContent.classList.toggle('hidden');
+      }
+    });
+  });
+</script>
 
-            const createTimelineItem = (item, index) => {
-                const detailsHtml = item.details.map(d => `<li class="text-gray-300">${d}</li>`).join('');
-                // The period is included but made conditionally invisible or simply used for a consistent look.
-                // Since the request was to 'remove dates', I'll update the display line here.
-                // The period data is now kept in the JS array for reference but not displayed in the card.
-                const itemEl = document.createElement('div');
-                itemEl.className = 'timeline-item mb-8 flex justify-between items-center w-full';
-                itemEl.innerHTML = `
-                    <div class="order-1 w-5/12"></div>
-                    <div class="z-20 flex items-center order-1 bg-gradient-to-r from-cyan-500 to-pink-500 w-8 h-8 rounded-full timeline-dot"></div>
-                    <div class="order-1 glass-strong rounded-lg w-5/12 px-6 py-4 timeline-card glow-border-cyan">
-                        <h3 class="font-bold text-cyan-300 text-lg">${item.role}</h3>
-                        <p class="text-sm font-medium text-pink-400">${item.company}</p> 
-                        <div class="timeline-details hidden mt-3">
-                            <ul class="list-disc list-inside space-y-1">
-                                ${detailsHtml}
-                            </ul>
-                        </div>
-                    </div>
-                `;
-                return itemEl;
-            };
-
-            const renderTimeline = (filter) => {
-                timelineContainer.innerHTML = '<div class="timeline-line"></div>';
-                const filteredData = filter === 'all' ? experienceData : experienceData.filter(item => item.type === filter);
-
-                filteredData.forEach((item, index) => {
-                    const timelineItem = createTimelineItem(item, index);
-                    if (index % 2 !== 0) {
-                        timelineItem.classList.add('flex-row-reverse');
-                    }
-                    timelineContainer.appendChild(timelineItem);
-                });
-                
-                document.querySelectorAll('.timeline-card').forEach(card => {
-                    card.addEventListener('click', () => {
-                        card.querySelector('.timeline-details').classList.toggle('hidden');
-                    });
-                });
-            };
-
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    filterBtns.forEach(b => {
-                        b.classList.remove('bg-gradient-to-r', 'from-cyan-500', 'to-pink-500', 'text-white', 'glow-box-cyan');
-                        b.classList.add('glass-strong', 'text-cyan-300', 'border', 'border-cyan-500/50');
-                    });
-                    btn.classList.add('bg-gradient-to-r', 'from-cyan-500', 'to-pink-500', 'text-white', 'glow-box-cyan');
-                    btn.classList.remove('glass-strong', 'text-cyan-300', 'border', 'border-cyan-500/50');
-                    renderTimeline(btn.dataset.filter);
-                });
-            });
-
-            renderTimeline('all');
-
-            // Counter Animation
-            const countUp = (el) => {
-                const target = +el.dataset.target;
-                const duration = 2000;
-                const frameRate = 1000 / 60;
-                const totalFrames = Math.round(duration / frameRate);
-                let frame = 0;
-                
-                const counter = setInterval(() => {
-                    frame++;
-                    const progress = frame / totalFrames;
-                    const current = Math.round(target * progress);
-                    el.textContent = current.toLocaleString();
-
-                    if (frame === totalFrames) {
-                        clearInterval(counter);
-                        el.textContent = target.toLocaleString();
-                    }
-                }, frameRate);
-            };
-
-            const counterElement = document.getElementById('subscriber-count');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        countUp(counterElement);
-                        observer.unobserve(counterElement);
-                    }
-                });
-            }, { threshold: 0.5 });
-
-            observer.observe(counterElement);
-
-            // Chart
-            const ctx = document.getElementById('experienceChart').getContext('2d');
-            const moderatorCount = experienceData.filter(e => e.type === 'moderator').length;
-            const ambassadorCount = experienceData.filter(e => e.type === 'ambassador').length;
-            
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Moderator/Manager', 'Ambassador'],
-                    datasets: [{
-                        label: 'Number of Roles',
-                        data: [moderatorCount, ambassadorCount],
-                        backgroundColor: [
-                            'rgba(0, 255, 255, 0.6)',
-                            'rgba(255, 0, 128, 0.6)'
-                        ],
-                        borderColor: [
-                            'rgba(0, 255, 255, 1)',
-                            'rgba(255, 0, 128, 1)'
-                        ],
-                        borderWidth: 2,
-                        barPercentage: 0.6
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                stepSize: 1,
-                                color: '#e0e7ff'
-                            },
-                            grid: {
-                                color: 'rgba(0, 255, 255, 0.1)'
-                            }
-                        },
-                        x: {
-                            ticks: {
-                                color: '#e0e7ff'
-                            },
-                            grid: {
-                                color: 'rgba(0, 255, 255, 0.1)'
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(10, 14, 39, 0.9)',
-                            borderColor: '#00ffff',
-                            borderWidth: 1,
-                            titleColor: '#00ffff',
-                            bodyColor: '#e0e7ff'
-                        }
-                    }
-                }
-            });
-
-            // Particle Animation
-            const canvas = document.getElementById('background-canvas');
-            const ctxCanvas = canvas.getContext('2d');
-            let particles = [];
-            const particleCount = 80;
-
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-
-            class Particle {
-                constructor() {
-                    this.x = Math.random() * canvas.width;
-                    this.y = Math.random() * canvas.height;
-                    this.vx = (Math.random() - 0.5) * 0.5;
-                    this.vy = (Math.random() - 0.5) * 0.5;
-                    this.radius = Math.random() * 2 + 1;
-                    
-                    const colors = ['#00ffff', '#ff0080', '#bf00ff'];
-                    this.color = colors[Math.floor(Math.random() * colors.length)];
-                }
-
-                draw() {
-                    ctxCanvas.beginPath();
-                    ctxCanvas.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-                    
-                    // Glow effect
-                    const gradient = ctxCanvas.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius * 3);
-                    gradient.addColorStop(0, this.color);
-                    gradient.addColorStop(0.5, this.color + '40');
-                    gradient.addColorStop(1, 'transparent');
-                    
-                    ctxCanvas.fillStyle = gradient;
-                    ctxCanvas.fill();
-                    
-                    ctxCanvas.fillStyle = this.color;
-                    ctxCanvas.fill();
-                }
-
-                update() {
-                    if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
-                        this.vx = -this.vx;
-                    }
-                    if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
-                        this.vy = -this.vy;
-                    }
-                    this.x += this.vx;
-                    this.y += this.vy;
-                    this.draw();
-                }
-            }
-
-            function initParticles() {
-                particles = [];
-                for (let i = 0; i < particleCount; i++) {
-                    particles.push(new Particle());
-                }
-            }
-
-            function connectParticles() {
-                for (let i = 0; i < particles.length; i++) {
-                    for (let j = i + 1; j < particles.length; j++) {
-                        const dx = particles[i].x - particles[j].x;
-                        const dy = particles[i].y - particles[j].y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-
-                        if (distance < 150) {
-                            ctxCanvas.beginPath();
-                            ctxCanvas.strokeStyle = `rgba(0, 255, 255, ${0.2 - distance / 750})`;
-                            ctxCanvas.lineWidth = 1;
-                            ctxCanvas.moveTo(particles[i].x, particles[i].y);
-                            ctxCanvas.lineTo(particles[j].x, particles[j].y);
-                            ctxCanvas.stroke();
-                        }
-                    }
-                }
-            }
-
-            function animateParticles() {
-                ctxCanvas.clearRect(0, 0, canvas.width, canvas.height);
-                for (let i = 0; i < particles.length; i++) {
-                    particles[i].update();
-                }
-                connectParticles();
-                requestAnimationFrame(animateParticles);
-            }
-
-            window.addEventListener('resize', () => {
-                resizeCanvas();
-                initParticles();
-            });
-            
-            resizeCanvas();
-            initParticles();
-            animateParticles();
-        });
-    </script>
 </body>
 </html>
